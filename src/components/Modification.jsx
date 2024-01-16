@@ -12,13 +12,16 @@ export default function Modification(props) {
     const uppercaseHandler=()=>{
         let newText = text.toUpperCase();
         setText(newText);
+        props.alert('Text converted to uppercase','success');
     }
     const lowercaseHandler=()=>{
       let newText = text.toLowerCase();
       setText(newText);
+      props.alert('Text converted to lowercase','success');
     }
     const copyTextHandler=()=>{
       navigator.clipboard.writeText(text);
+      props.alert('Text copied to clipboard','success');
     }
     const capitalizeHandler=()=>{
       let input = text;
@@ -29,6 +32,7 @@ export default function Modification(props) {
       let result = capitalizedSentences.join('. ');
 
       setText(result);
+      props.alert('Text capitalized','success');
     }
     const clearTextHandler=()=>{
       setText('');
@@ -40,7 +44,7 @@ export default function Modification(props) {
     <>
     <div>
         <h2 className={`text-2xl md:text-3xl ${props.mode === 'dark'?'text-white':''}`}>TextUtils Modification</h2>
-        <p className={`mt-5 ${props.mode === 'dark'?'text-white':''}`}>In this belowed box you simpley put your text and select you choice with the text you want to do.</p>
+        <p className={`mt-5 ${props.mode === 'dark'?'text-white':''}`}>In this belowed box you simpley put your text and select your choice with the text you want to do.</p>
     </div>
     <div className="w-ful md:w-10/12 mt-5">
       <div className="mb-2 block">
@@ -61,7 +65,7 @@ export default function Modification(props) {
 
       <div className='col-span-12 md:col-span-6'>
         <h2 className={`text-xl font-semibold my-3 ${props.mode==='dark'?'text-white':''}`}>Text Summary</h2>
-        <p className={` ${props.mode==='dark'?'text-white':''}`}>{text.split(" ").length} words and {text.length} characters</p>
+        <p className={` ${props.mode==='dark'?'text-white':''}`}>{text.split(" ").filter((element)=>{return element.length!=0}).length} words and {text.length} characters</p>
         <h2 className={`text-xl font-semibold my-3 ${props.mode==='dark'?'text-white':''}`}>Text Preview</h2>
         <p className={` ${props.mode==='dark'?'text-white':''}`}>{text.length>0?text:'Write something in the above Text Box to preview here.'}</p>
       </div>
